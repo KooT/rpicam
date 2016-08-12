@@ -1,2 +1,2 @@
 # rpicam
-Node.Js app for taking picture on Raspberry PI
+Node.js app for taking picture on Raspberry PI
