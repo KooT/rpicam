@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('rpicam:server');
 var http = require('http');
 
+
 /**
  * Get port from environment and store in Express.
  */
@@ -25,7 +26,16 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+var io = require('socket.io').listen(server);
+
+server.listen(port); 
+
+io.sockets.on('connection', function (socket) {
+    socket.on('takepicture', function (data) {
+        io.sockets.emit('picturetaken', {});
+    });
+});
+
 server.on('error', onError);
 server.on('listening', onListening);
 
